@@ -1,16 +1,29 @@
-# advanced2
+# Doctor Appointment App
 
-A new Flutter project.
+A new Flutter project for booking doctor appointments and managing patient follow-ups.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📌 System design
+```
+lib/
+├── core/
+│   ├── di/            # Dependency Injection setup
+│   ├── networking/    # API services, clients, interceptors
+│   ├── routing/       # App routing, navigation helpers
+│   ├── helpers/       # Utilities, extensions, shared logic
+│   ├── theming/       # App themes, colors, typography
+│   └── widgets/       # Reusable UI components
+│
+└── features/
+    └── home/
+        ├── data/
+        │   ├── model/  # Data models (DTO / entities)
+        │   └── repo/   # Repositories & data sources
+        │
+        ├── logic/
+        │   ├── cubit/  # State management (Cubit)
+        │   └── states/ # Cubit state definitions
+        │
+        └── ui/
+            ├── screens/ # Screens & pages of the feature
+            └── widgets/ # Feature-specific UI components
+```
