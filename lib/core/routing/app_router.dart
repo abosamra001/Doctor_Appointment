@@ -1,5 +1,5 @@
 import 'package:advanced2/core/routing/routes.dart';
-import 'package:advanced2/features/login/ui/screens/home_screen.dart';
+import 'package:advanced2/features/login/ui/screens/login_screen.dart';
 import 'package:advanced2/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class AppRouter {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (context) => OnboardingScreen());
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        return MaterialPageRoute(builder: (context) => LoginScreen());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(body: Center(child: Text("No page route for ${routeSettings.name}"))),
