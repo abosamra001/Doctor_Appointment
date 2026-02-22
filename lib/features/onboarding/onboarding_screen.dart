@@ -17,9 +17,9 @@ class OnboardingScreen extends StatelessWidget {
             padding: EdgeInsets.only(top: 30.h, bottom: 30.h),
             child: Column(
               children: [
-                DocDocLogoAndName(),
+                const DocDocLogoAndName(),
                 SizedBox(height: 30.h),
-                DoctorImageAndText(),
+                const DoctorImageAndText(),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Column(
@@ -30,7 +30,7 @@ class OnboardingScreen extends StatelessWidget {
                         style: TextStyles.font13GrayReqular,
                       ),
                       SizedBox(height: 30.h),
-                      GetStartedButton(),
+                      const GetStartedButton(),
                     ],
                   ),
                 ),
