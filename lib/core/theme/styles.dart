@@ -5,11 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class TextStyles {
   // Dark Blue
-  static TextStyle get font14DartBlueMedium => TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeightHelper.medium,
-    color: ColorManager.darkBlue,
-  );
   static TextStyle get font11DartBlueMedium => TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeightHelper.medium,
@@ -18,6 +13,26 @@ abstract class TextStyles {
   static TextStyle get font11DartBlueReqular => TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeightHelper.regular,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font13DartBlueReqular => TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font14DartBlueMedium => TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font14BlueSemiBold => TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font15DarkBlueMedium => TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.medium,
     color: ColorManager.darkBlue,
   );
 

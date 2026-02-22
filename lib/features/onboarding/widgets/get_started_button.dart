@@ -3,6 +3,7 @@ import 'package:advanced2/core/routing/routes.dart';
 import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GetStartedButton extends StatelessWidget {
   const GetStartedButton({super.key});
@@ -10,12 +11,14 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => context.pushNamed(Routes.homeScreen),
+      onPressed: () => context.pushNamed(Routes.loginScreen),
       style: ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(ColorManager.mainBlue),
         minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 50)),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        ),
       ),
       child: Text('Get Started', style: TextStyles.font16WhiteReqular),
     );
