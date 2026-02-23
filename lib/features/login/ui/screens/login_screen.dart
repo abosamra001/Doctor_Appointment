@@ -3,8 +3,8 @@ import 'package:advanced2/core/theme/styles.dart';
 import 'package:advanced2/core/widgets/app_text_button.dart';
 import 'package:advanced2/features/login/data/models/login_request_body.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
-import 'package:advanced2/features/login/ui/widgets/already_have_an_account_text.dart';
-import 'package:advanced2/features/login/ui/widgets/email_and_password.dart';
+import 'package:advanced2/features/login/ui/widgets/dont_have_an_account_text.dart';
+import 'package:advanced2/features/login/ui/widgets/login_email_and_password.dart';
 import 'package:advanced2/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:advanced2/features/login/ui/widgets/terms_and_conditions_text.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   void dispose() {
     emailController.dispose();
@@ -35,13 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  verticalSpace(40),
                   Text("Welcome Back", style: TextStyles.font24BlueBold),
-                  verticalSpace(8),
+                  verticalSpace(10),
                   Text(
                     "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
                     style: TextStyles.font14GrayReqular,
@@ -49,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   verticalSpace(36),
                   Column(
                     children: [
-                      EmailAndPassword(
+                      LoginEmailAndPassword(
                         formKey: formKey,
                         emailController: emailController,
                         passwordController: passwordController,
@@ -57,9 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
                         child: GestureDetector(
-                          onTap: () {
-                            /** TODO: Create the right logic */
-                          },
+                          onTap: () {},
                           child: Text(
                             'Forgot Password?',
                             style: TextStyles.font12BlueReqular,
@@ -80,10 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         text: 'Login',
                       ),
-                      verticalSpace(16),
+                      verticalSpace(24),
                       const TermsAndConditionsText(),
-                      verticalSpace(20),
-                      const AlreadyHaveAnAccountText(),
+                      verticalSpace(16),
+                      const DontHaveAnAccountText(),
                     ],
                   ),
                 ],
