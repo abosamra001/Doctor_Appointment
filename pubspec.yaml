@@ -43,6 +43,8 @@ dependencies:
   easy_localization: ^3.0.8
   # Converting to and from JSON automatically
   json_annotation: ^4.9.0
+  # A Flutter package that provides a customizable phone number input field with country code selection and validation.
+  intl_phone_field: ^3.2.0
 
   # Networking
   dio: ^5.9.0

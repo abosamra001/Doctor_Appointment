@@ -1,29 +1,34 @@
 import 'package:advanced2/core/helpers/app_regex.dart';
 import 'package:advanced2/core/helpers/spacer.dart';
-import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/widgets/app_text_form_field.dart';
 import 'package:advanced2/features/login/ui/widgets/password_validation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class EmailAndPassword extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
   final GlobalKey formKey;
+
+  final TextEditingController nameController;
   final TextEditingController emailController;
+  final TextEditingController phoneNumberController;
   final TextEditingController passwordController;
-  const EmailAndPassword({
+  final TextEditingController passwordConfirmationController;
+  const SignUpForm({
     super.key,
     required this.formKey,
+    required this.nameController,
     required this.emailController,
+    required this.phoneNumberController,
     required this.passwordController,
+    required this.passwordConfirmationController,
   });
 
   @override
-  State<EmailAndPassword> createState() => _EmailAndPasswordState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _EmailAndPasswordState extends State<EmailAndPassword> {
-  bool isObscureText = true;
-
+class _SignUpFormState extends State<SignUpForm> {
+  // Password validation
   bool hasLowerCase = false;
   bool hasUpperCase = false;
   bool hasSpecialCharacter = false;
@@ -40,14 +45,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
     passwordFocusNode = FocusNode();
     passwordFocusNode.addListener(_changeFocus);
-  }
-
-  @override
-  void dispose() {
-    widget.passwordController.removeListener(_changeValidationState);
-    passwordFocusNode.removeListener(_changeFocus);
-    passwordFocusNode.dispose();
-    super.dispose();
   }
 
   void _changeValidationState() {
@@ -74,6 +71,17 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       child: Column(
         children: [
           AppTextFormField(
+            controller: widget.nameController,
+            hintText: 'Name',
+            textInputType: TextInputType.name,
+            validator: (value) {
+              if (value == null || value.isEmpty || value.length < 3) {
+                return 'Please enter a valid name';
+              }
+            },
+          ),
+          verticalSpace(18),
+          AppTextFormField(
             controller: widget.emailController,
             hintText: 'Email',
             textInputType: TextInputType.emailAddress,
@@ -87,21 +95,25 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           ),
           verticalSpace(18),
           AppTextFormField(
+            controller: widget.phoneNumberController,
+            hintText: 'Phone number',
+            textInputType: TextInputType.phone,
+            validator: (value) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isPhoneNumberValid(value)) {
+                return 'Please enter a valid phone number';
+              }
+            },
+          ),
+          verticalSpace(18),
+          AppTextFormField(
             controller: widget.passwordController,
             hintText: 'Password',
+            textInputType: TextInputType.visiblePassword,
             focusNode: passwordFocusNode,
-            obscureText: isObscureText,
-            suffixIcon: GestureDetector(
-              onTap: () => setState(() {
-                isObscureText = !isObscureText;
-              }),
-              child: Icon(
-                isObscureText ? Icons.visibility_off : Icons.visibility,
-                color: ColorManager.mainBlue,
-              ),
-            ),
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null || value.isEmpty || !checkPassword()) {
                 return 'Please enter a valid password';
               }
             },
@@ -117,9 +129,36 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 hasMinlength: hasMinlength,
               ),
             ),
-          verticalSpace(24),
+          verticalSpace(18),
+          AppTextFormField(
+            controller: widget.passwordConfirmationController,
+            hintText: 'Password Confirmation',
+            textInputType: TextInputType.visiblePassword,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a valid password';
+              } else if (value != widget.passwordController.text) {
+                return 'Password doesn\'t match';
+              }
+            },
+          ),
         ],
       ),
     );
+  }
+
+  bool checkPassword() =>
+      hasLowerCase &&
+      hasUpperCase &&
+      hasMinlength &&
+      hasNumber &&
+      hasSpecialCharacter;
+
+  @override
+  void dispose() {
+    widget.passwordController.removeListener(_changeValidationState);
+    passwordFocusNode.removeListener(_changeFocus);
+    passwordFocusNode.dispose();
+    super.dispose();
   }
 }

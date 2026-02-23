@@ -11,7 +11,7 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => context.pushNamed(Routes.loginScreen),
+      onPressed: () => context.pushReplacementNamed(Routes.loginScreen),
       style: ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(ColorManager.mainBlue),
         minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 50)),
