@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
+  await setupGetIt();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
