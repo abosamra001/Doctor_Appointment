@@ -6,7 +6,7 @@ class DioFactory {
 
   static Dio? dio;
 
-  static Dio getDio() {
+  static Future<Dio> getDio() async {
     if (dio == null) {
       const Duration timeOut = Duration(seconds: 30);
       dio = Dio();

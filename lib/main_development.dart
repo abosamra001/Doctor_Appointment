@@ -5,6 +5,6 @@ import 'package:advanced2/docdoc_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
+  await setupGetIt();
   runApp(DocDocApp(appRouter: AppRouter()));
 }
