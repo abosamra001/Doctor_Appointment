@@ -1,0 +1,18 @@
+
+default_platform(:android)
+
+platform :android do
+  desc "Firebase app distribution lane"
+  lane :distribution do
+    sh "flutter clean"
+    sh "flutter build apk --release --flavor production --target lib/main_production.dart"
+    firebase_app_distribution(
+      app: "1:1043084002329:android:0fe2283f1ec3dc73a25688",
+      firebase_cli_token: "1//03rLhky5UDYl0CgYIARAAGAMSNwF-L9IriXMmEREjKyFrACX4yaOrt4zCpqYsP6YtETJ4PjmfOF9QPOv0UOnAa3rpfYL-IFkAFbY",
+      android_artifact_type: "APK",
+      android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
+      testers: "mosamir916@gmail.com",
+      release_notes: "First release of the app to Firebase App Distribution"
+  )
+  end
+end
