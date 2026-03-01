@@ -41,11 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpace(40),
-                  Text("Welcome Back", style: TextStyles.font24BlueBold),
+                  Text("Welcome Back", style: AppTextStyles.font24BlueBold),
                   verticalSpace(10),
                   Text(
                     "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
-                    style: TextStyles.font14GrayReqular,
+                    style: AppTextStyles.font14GrayReqular,
                   ),
                   verticalSpace(36),
                   Column(
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {},
                           child: Text(
                             'Forgot Password?',
-                            style: TextStyles.font12BlueReqular,
+                            style: AppTextStyles.font12BlueReqular,
                           ),
                         ),
                       ),

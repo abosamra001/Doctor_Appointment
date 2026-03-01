@@ -1,6 +1,6 @@
 import 'package:advanced2/core/di/dependency_injection.dart';
 import 'package:advanced2/core/routing/routes.dart';
-import 'package:advanced2/features/home/ui/home_screen.dart';
+import 'package:advanced2/features/home/ui/screens/home_screen.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
 import 'package:advanced2/features/login/ui/screens/login_screen.dart';
 import 'package:advanced2/features/onboarding/onboarding_screen.dart';

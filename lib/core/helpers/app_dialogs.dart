@@ -22,7 +22,7 @@ class AppDialogs {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.error, color: Colors.red, size: 32),
-        title: Text(error, style: TextStyles.font15DarkBlueMedium),
+        title: Text(error, style: AppTextStyles.font15DarkBlueMedium),
         content: (subError != null && subError.isNotEmpty)
             ? Column(
                 mainAxisSize: .min,
@@ -30,7 +30,7 @@ class AppDialogs {
                 children: [
                   ...subError.map(
                     (error) =>
-                        Text(error, style: TextStyles.font13DartBlueReqular),
+                        Text(error, style: AppTextStyles.font13DartBlueReqular),
                   ),
                 ],
               )
@@ -40,7 +40,7 @@ class AppDialogs {
             onPressed: () {
               context.pop();
             },
-            child: Text('Got it', style: TextStyles.font14BlueSemiBold),
+            child: Text('Got it', style: AppTextStyles.font14BlueSemiBold),
           ),
         ],
         actionsAlignment: .center,
@@ -57,11 +57,11 @@ class AppDialogs {
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.done, color: Colors.green, size: 45),
-        content: Text(message, style: TextStyles.font15DarkBlueMedium),
+        content: Text(message, style: AppTextStyles.font15DarkBlueMedium),
         actions: [
           TextButton(
             onPressed: onPressed,
-            child: Text('Continue', style: TextStyles.font14BlueSemiBold),
+            child: Text('Continue', style: AppTextStyles.font14BlueSemiBold),
           ),
         ],
         actionsAlignment: .center,

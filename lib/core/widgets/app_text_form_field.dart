@@ -55,11 +55,11 @@ class AppTextFormField extends StatelessWidget {
         errorBorder: errorBorder ?? getBorder(ColorManager.red),
         focusedErrorBorder: focusedErrorBorder ?? getBorder(ColorManager.red),
         hintText: hintText,
-        hintStyle: hintStyle ?? TextStyles.font14LightGrayReqular,
+        hintStyle: hintStyle ?? AppTextStyles.font14LightGrayReqular,
         suffixIcon: suffixIcon,
       ),
       obscureText: obscureText ?? false,
-      style: inputTextStyle ?? TextStyles.font14DartBlueMedium,
+      style: inputTextStyle ?? AppTextStyles.font14DartBlueMedium,
       keyboardType: textInputType,
       validator: (value) => validator(value),
     );

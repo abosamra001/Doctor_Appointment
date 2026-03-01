@@ -16,11 +16,11 @@ class DontHaveAnAccountText extends StatelessWidget {
         children: [
           Text(
             'Don\'t have an account yet?  ',
-            style: TextStyles.font11DartBlueReqular,
+            style: AppTextStyles.font11DartBlueReqular,
           ),
           GestureDetector(
             onTap: () => context.pushReplacementNamed(Routes.signupScreen),
-            child: Text('Sign Up', style: TextStyles.font11BlueSemiBold),
+            child: Text('Sign Up', style: AppTextStyles.font11BlueSemiBold),
           ),
         ],
       ),

@@ -37,11 +37,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 crossAxisAlignment: .start,
                 children: [
                   verticalSpace(40),
-                  Text('Create Account', style: TextStyles.font24BlueBold),
+                  Text('Create Account', style: AppTextStyles.font24BlueBold),
                   verticalSpace(10),
                   Text(
                     'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!',
-                    style: TextStyles.font14GrayReqular,
+                    style: AppTextStyles.font14GrayReqular,
                   ),
                   verticalSpace(36),
                   Column(
