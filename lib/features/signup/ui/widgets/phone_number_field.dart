@@ -32,7 +32,7 @@ class PhoneNumberField extends StatelessWidget {
         errorBorder: getBorder(ColorManager.red),
         focusedErrorBorder: getBorder(ColorManager.red),
         hintText: hintText,
-        hintStyle: TextStyles.font14LightGrayReqular,
+        hintStyle: AppTextStyles.font14LightGrayReqular,
       ),
     );
   }

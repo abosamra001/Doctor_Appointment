@@ -16,11 +16,11 @@ class AlreadyHaveAnAccountText extends StatelessWidget {
         children: [
           Text(
             'Already have an account?  ',
-            style: TextStyles.font11DartBlueReqular,
+            style: AppTextStyles.font11DartBlueReqular,
           ),
           GestureDetector(
             onTap: () => context.pushReplacementNamed(Routes.loginScreen),
-            child: Text('Login', style: TextStyles.font11BlueSemiBold),
+            child: Text('Login', style: AppTextStyles.font11BlueSemiBold),
           ),
         ],
       ),

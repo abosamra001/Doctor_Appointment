@@ -49,7 +49,7 @@ class PasswordValidation extends StatelessWidget {
         horizontalSpace(6.w),
         Text(
           text,
-          style: TextStyles.font13DartBlueReqular.copyWith(
+          style: AppTextStyles.font13DartBlueReqular.copyWith(
             decoration: isValidated ? TextDecoration.lineThrough : null,
             decorationColor: ColorManager.green,
             decorationThickness: 2,

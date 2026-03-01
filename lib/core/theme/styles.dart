@@ -3,7 +3,7 @@ import 'package:advanced2/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-abstract class TextStyles {
+abstract class AppTextStyles {
   // Dark Blue
   static TextStyle get font11DartBlueMedium => TextStyle(
     fontSize: 11.sp,
@@ -12,6 +12,11 @@ abstract class TextStyles {
   );
   static TextStyle get font11DartBlueReqular => TextStyle(
     fontSize: 11.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font12DartBlueReqular => TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorManager.darkBlue,
   );
@@ -33,6 +38,21 @@ abstract class TextStyles {
   static TextStyle get font15DarkBlueMedium => TextStyle(
     fontSize: 15.sp,
     fontWeight: FontWeightHelper.medium,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font16DarkBlueBold => TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font18DarkBlueBold => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.bold,
+    color: ColorManager.darkBlue,
+  );
+  static TextStyle get font18DarkBlueSemitBold => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.semiBold,
     color: ColorManager.darkBlue,
   );
 
@@ -69,8 +89,33 @@ abstract class TextStyles {
     fontWeight: FontWeightHelper.semiBold,
     color: Colors.white,
   );
+  static TextStyle get font18WhiteMedium => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: Colors.white,
+  );
 
   // Gray
+  static TextStyle get font11GrayReqular => TextStyle(
+    fontSize: 11.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.gray,
+  );
+  static TextStyle get font12GrayReqular => TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.gray,
+  );
+  static TextStyle get font12GrayMedium => TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorManager.gray,
+  );
+  static TextStyle get font13GrayReqular => TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.gray,
+  );
   static TextStyle get font14GrayReqular => TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
@@ -80,16 +125,6 @@ abstract class TextStyles {
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorManager.lightGray,
-  );
-  static TextStyle get font13GrayReqular => TextStyle(
-    fontSize: 13.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: ColorManager.gray,
-  );
-  static TextStyle get font11GrayReqular => TextStyle(
-    fontSize: 11.sp,
-    fontWeight: FontWeightHelper.regular,
-    color: ColorManager.gray,
   );
 
   // Black
