@@ -28,36 +28,46 @@ class RecommendationDoctorItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
+            height: 110.h,
+            width: 110.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
             ),
-            child: Image.asset(imagePath),
+            clipBehavior: Clip.antiAlias,
+            child: Image.asset(imagePath, fit: BoxFit.cover),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
-            child: Column(
-              crossAxisAlignment: .start,
-              mainAxisAlignment: .spaceAround,
-              children: [
-                Text(
-                  'Dr. $doctorName',
-                  style: AppTextStyles.font16DarkBlueBold,
-                ),
-                Text(specialize, style: AppTextStyles.font12GrayReqular),
-                Row(
-                  crossAxisAlignment: .end,
-                  children: [
-                    Icon(
-                      Icons.star_rate_rounded,
-                      color: ColorManager.gold,
-                      size: 20.sp,
-                    ),
-                    Text(rating, style: AppTextStyles.font12GrayMedium),
-                    horizontalSpace(2),
-                    Text(reviewCount, style: AppTextStyles.font12GrayMedium),
-                  ],
-                ),
-              ],
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+              child: Column(
+                crossAxisAlignment: .start,
+                mainAxisAlignment: .spaceAround,
+                children: [
+                  Text(
+                    'Dr. $doctorName',
+                    style: AppTextStyles.font16DarkBlueBold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    specialize,
+                    style: AppTextStyles.font12GrayReqular,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
+                    crossAxisAlignment: .end,
+                    children: [
+                      Icon(
+                        Icons.star_rate_rounded,
+                        color: ColorManager.gold,
+                        size: 20.sp,
+                      ),
+                      Text(rating, style: AppTextStyles.font12GrayMedium),
+                      horizontalSpace(2),
+                      Text(reviewCount, style: AppTextStyles.font12GrayMedium),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

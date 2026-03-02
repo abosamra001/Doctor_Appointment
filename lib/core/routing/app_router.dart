@@ -1,6 +1,7 @@
 import 'package:advanced2/core/di/dependency_injection.dart';
 import 'package:advanced2/core/routing/routes.dart';
 import 'package:advanced2/features/home/ui/screens/home_screen.dart';
+import 'package:advanced2/features/login/data/models/login_response.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
 import 'package:advanced2/features/login/ui/screens/login_screen.dart';
 import 'package:advanced2/features/onboarding/onboarding_screen.dart';
@@ -31,7 +32,10 @@ class AppRouter {
           ),
         );
       case Routes.homeScreen:
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+        final loginModel = routeSettings.arguments as LoginResponse?;
+        return MaterialPageRoute(
+          builder: (context) => HomeScreen(userName: loginModel!.data.userName),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

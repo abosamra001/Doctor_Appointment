@@ -9,7 +9,6 @@ class RecommendationDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: .min,
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
@@ -34,7 +33,7 @@ class RecommendationDoctor extends StatelessWidget {
         ),
         verticalSpace(8),
         const RecommendationDoctorItem(
-          doctorName: 'Dr. Jack Sulivan',
+          doctorName: 'Jack Sulivan',
           specialize: 'General  |  RSUD Gatot Subroto',
           imagePath: 'assets/images/doc2.png',
           rating: '4.8',

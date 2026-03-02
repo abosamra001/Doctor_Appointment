@@ -2,6 +2,7 @@ import 'package:advanced2/core/helpers/spacer.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:advanced2/features/home/ui/widgets/speciality_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorSpeciality extends StatelessWidget {
   const DoctorSpeciality({super.key});
@@ -9,7 +10,6 @@ class DoctorSpeciality extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: .min,
       children: [
         Row(
           mainAxisAlignment: .spaceBetween,
@@ -25,8 +25,9 @@ class DoctorSpeciality extends StatelessWidget {
           ],
         ),
         verticalSpace(16),
-        Row(
-          mainAxisAlignment: .spaceBetween,
+        Wrap(
+          spacing: 14.w,
+          alignment: WrapAlignment.spaceBetween,
           children: [
             SpecialityItem(
               onTap: () {},
