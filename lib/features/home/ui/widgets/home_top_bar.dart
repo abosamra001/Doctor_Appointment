@@ -11,7 +11,6 @@ class HomeTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: .spaceBetween,
-
       children: [
         Column(
           crossAxisAlignment: .start,
