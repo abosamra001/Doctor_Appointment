@@ -3,17 +3,18 @@ import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RecommendationDoctorItem extends StatelessWidget {
   final String doctorName;
-  final String imagePath;
+  final String image;
   final String specialize;
   final String rating;
   final String reviewCount;
   const RecommendationDoctorItem({
     super.key,
     required this.doctorName,
-    required this.imagePath,
+    required this.image,
     required this.specialize,
     required this.rating,
     required this.reviewCount,
@@ -34,7 +35,25 @@ class RecommendationDoctorItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Image.asset(imagePath, fit: BoxFit.cover),
+            child: Image.network(
+              image,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return SvgPicture.asset(
+                  'assets/svgs/doctor_placeholder.svg',
+                  fit: BoxFit.cover,
+                );
+              },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Container(
+                  color: Colors.grey.shade200,
+                  child: const Center(
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                );
+              },
+            ),
           ),
           Expanded(
             child: Padding(

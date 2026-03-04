@@ -1,6 +1,8 @@
 import 'package:advanced2/core/helpers/app_dialogs.dart';
 import 'package:advanced2/core/helpers/extensions.dart';
+import 'package:advanced2/core/networking/token_storage.dart';
 import 'package:advanced2/core/routing/routes.dart';
+import 'package:advanced2/features/login/data/models/login_response.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
 import 'package:advanced2/features/login/logic/cubit/login_state.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +21,9 @@ class LoginBlocListener extends StatelessWidget {
         state.whenOrNull(
           loading: () => AppDialogs.showLoadingIndicator(context),
 
-          success: (loginResponse) {
-            context.pop();
-            context.pushReplacementNamed(Routes.homeScreen, arg: loginResponse);
-          },
+          success: (loginResponse) =>
+              _saveTokenAndLogin(context, loginResponse as LoginResponse),
+
           error: (error) {
             context.pop();
             AppDialogs.showErrorStateDialog(context, error: error);
@@ -31,5 +32,18 @@ class LoginBlocListener extends StatelessWidget {
       },
       child: child,
     );
+  }
+
+  void _saveTokenAndLogin(
+    BuildContext context,
+    LoginResponse loginResponse,
+  ) async {
+    context.pop();
+    final token = loginResponse.data.token;
+    final userName = loginResponse.data.userName;
+    await TokenStorage.saveToken(token);
+    if (context.mounted) {
+      context.pushReplacementNamed(Routes.homeScreen, arg: userName);
+    }
   }
 }

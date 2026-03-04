@@ -8,11 +8,13 @@ class SpecialityItem extends StatelessWidget {
   final String label;
   final String iconPath;
   final VoidCallback onTap;
+  final bool isSelected;
   const SpecialityItem({
     super.key,
     required this.label,
     required this.iconPath,
     required this.onTap,
+    required this.isSelected,
   });
 
   @override
@@ -27,14 +29,20 @@ class SpecialityItem extends StatelessWidget {
             Container(
               width: 56.w,
               height: 56.h,
-              decoration: const BoxDecoration(
-                color: ColorManager.blueWhite,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? ColorManager.mainBlue.withAlpha(155)
+                    : ColorManager.blueWhite,
                 shape: BoxShape.circle,
               ),
               child: Image.asset(iconPath),
             ),
             verticalSpace(8),
-            Text(label, style: AppTextStyles.font12DartBlueReqular),
+            Text(
+              label,
+              style: AppTextStyles.font11DartBlueReqular,
+              overflow: .ellipsis,
+            ),
           ],
         ),
       ),
