@@ -3,9 +3,16 @@ import 'package:advanced2/core/theme/styles.dart';
 import 'package:advanced2/features/home/ui/widgets/recommendation_doctor_item.dart';
 import 'package:flutter/material.dart';
 
-class RecommendationDoctor extends StatelessWidget {
-  const RecommendationDoctor({super.key});
+class RecommendationDoctors extends StatefulWidget {
+  final List<RecommendationDoctorItem> doctors;
+  const RecommendationDoctors({super.key, required this.doctors});
 
+  @override
+  State<RecommendationDoctors> createState() => _RecommendationDoctorsState();
+}
+
+class _RecommendationDoctorsState extends State<RecommendationDoctors> {
+  bool seeAll = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,31 +21,40 @@ class RecommendationDoctor extends StatelessWidget {
           mainAxisAlignment: .spaceBetween,
           children: [
             Text(
-              'Recommendation Doctor',
+              'Recommendation Doctors',
               style: AppTextStyles.font18DarkBlueSemitBold,
             ),
             GestureDetector(
-              onTap: () {},
-              child: Text('See All', style: AppTextStyles.font12BlueReqular),
+              onTap: () {
+                setState(() {
+                  seeAll = !seeAll;
+                });
+              },
+              child: Text(
+                seeAll ? 'See less' : 'See all',
+                style: AppTextStyles.font12BlueReqular,
+              ),
             ),
           ],
         ),
         verticalSpace(8),
-        const RecommendationDoctorItem(
-          doctorName: 'Randy Wigham',
-          specialize: 'General  |  RSUD Gatot Subroto',
-          imagePath: 'assets/images/doc1.png',
-          rating: '4.8',
-          reviewCount: '(4,279 reviews)',
-        ),
-        verticalSpace(8),
-        const RecommendationDoctorItem(
-          doctorName: 'Jack Sulivan',
-          specialize: 'General  |  RSUD Gatot Subroto',
-          imagePath: 'assets/images/doc2.png',
-          rating: '4.8',
-          reviewCount: '(4,279 reviews)',
-        ),
+        widget.doctors.isEmpty
+            ? Center(
+                child: Text(
+                  'Tab a Speciality from above to preview doctors.',
+                  style: AppTextStyles.font14GrayReqular,
+                  textAlign: .center,
+                ),
+              )
+            : ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: seeAll
+                    ? widget.doctors.length
+                    : (widget.doctors.length > 3 ? 3 : widget.doctors.length),
+                itemBuilder: (context, i) => widget.doctors[i],
+                separatorBuilder: (context, i) => verticalSpace(12),
+              ),
       ],
     );
   }

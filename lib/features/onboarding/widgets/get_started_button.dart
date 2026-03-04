@@ -1,4 +1,5 @@
 import 'package:advanced2/core/helpers/extensions.dart';
+import 'package:advanced2/core/networking/token_storage.dart';
 import 'package:advanced2/core/routing/routes.dart';
 import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/theme/styles.dart';
@@ -11,7 +12,7 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => context.pushReplacementNamed(Routes.loginScreen),
+      onPressed: () => _onGetStartedPressed(context),
       style: ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(ColorManager.mainBlue),
         minimumSize: const WidgetStatePropertyAll(Size(double.infinity, 50)),
@@ -22,5 +23,16 @@ class GetStartedButton extends StatelessWidget {
       ),
       child: Text('Get Started', style: AppTextStyles.font16WhiteReqular),
     );
+  }
+
+  Future<void> _onGetStartedPressed(BuildContext context) async {
+    final hasValidToken = await TokenStorage.hasValidToken();
+    if (context.mounted) {
+      if (hasValidToken) {
+        context.pushReplacementNamed(Routes.homeScreen);
+      } else {
+        context.pushReplacementNamed(Routes.loginScreen);
+      }
+    }
   }
 }
