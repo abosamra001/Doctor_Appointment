@@ -30,6 +30,11 @@ abstract class AppTextStyles {
     fontWeight: FontWeightHelper.medium,
     color: ColorManager.darkBlue,
   );
+  static TextStyle get font14DartBlueRegular => TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeightHelper.regular,
+    color: ColorManager.darkBlue,
+  );
   static TextStyle get font14BlueSemiBold => TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.semiBold,
@@ -94,6 +99,11 @@ abstract class AppTextStyles {
     fontWeight: FontWeightHelper.medium,
     color: Colors.white,
   );
+  static TextStyle get font18WhiteSemiBold => TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.white,
+  );
 
   // Gray
   static TextStyle get font11GrayReqular => TextStyle(
@@ -131,6 +141,11 @@ abstract class AppTextStyles {
   static TextStyle get font24BlackBold => TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
+    color: Colors.black,
+  );
+  static TextStyle get font20BlackSemiBold => TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
     color: Colors.black,
   );
 }

@@ -1,7 +1,7 @@
 import 'package:advanced2/core/networking/api_service.dart';
 import 'package:advanced2/core/networking/dio_factory.dart';
-import 'package:advanced2/features/home/data/repos/specialization_repo.dart';
-import 'package:advanced2/features/home/logic/cubit/specialization_cubit.dart';
+import 'package:advanced2/features/home/data/repos/home_repo.dart';
+import 'package:advanced2/features/home/logic/cubit/home_cubit.dart';
 import 'package:advanced2/features/login/data/repos/login_repo.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
 import 'package:advanced2/features/signup/data/repos/signup_repo.dart';
@@ -26,11 +26,7 @@ Future<void> setupGetIt() async {
   );
   getIt.registerFactory<SignupCubit>(() => SignupCubit(signupRepo: getIt()));
 
-  // specialization
-  getIt.registerLazySingleton<SpecializationRepo>(
-    () => SpecializationRepo(apiService: getIt()),
-  );
-  getIt.registerFactory<SpecializationCubit>(
-    () => SpecializationCubit(specializationRepo: getIt()),
-  );
+  // home
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(apiService: getIt()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(homeRepo: getIt()));
 }

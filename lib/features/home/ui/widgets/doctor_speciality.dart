@@ -3,8 +3,9 @@ import 'package:advanced2/core/theme/styles.dart';
 import 'package:advanced2/features/home/data/models/specialization_response.dart';
 import 'package:advanced2/features/home/ui/widgets/speciality_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorSpeciality extends StatefulWidget {
+class DoctorSpeciality extends StatelessWidget {
   final List<SpecializationData> items;
   final Function(int) onSpecialityTap;
   final int? selectedItem;
@@ -16,59 +17,30 @@ class DoctorSpeciality extends StatefulWidget {
   });
 
   @override
-  State<DoctorSpeciality> createState() => _DoctorSpecialityState();
-}
-
-class _DoctorSpecialityState extends State<DoctorSpeciality> {
-  bool seeAll = false;
-  @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: .start,
       children: [
-        Row(
-          mainAxisAlignment: .spaceBetween,
-          children: [
-            Text(
-              'Doctor Speciality',
-              style: AppTextStyles.font18DarkBlueSemitBold,
-            ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  seeAll = !seeAll;
-                });
-              },
-              child: Text(
-                seeAll ? 'See less' : 'See all',
-                style: AppTextStyles.font12BlueReqular,
-              ),
-            ),
-          ],
-        ),
+        Text('Doctor Speciality', style: AppTextStyles.font18DarkBlueSemitBold),
         verticalSpace(16),
-        widget.items.isEmpty
-            ? const Center(child: Text('Loading Specializations...'))
-            : GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: seeAll
-                    ? widget.items.length
-                    : (widget.items.length > 4 ? 4 : widget.items.length),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  childAspectRatio: 0.75,
+        items.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : SizedBox(
+                height: 100.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: items.length,
+
+                  itemBuilder: (context, i) {
+                    final specialization = items[i];
+                    return SpecialityItem(
+                      label: specialization.speciality,
+                      iconPath: 'assets/images/speciality_items/general.png',
+                      isSelected: selectedItem == i,
+                      onTap: () => onSpecialityTap(i),
+                    );
+                  },
                 ),
-                itemBuilder: (context, i) {
-                  final specialization = widget.items[i];
-                  return SpecialityItem(
-                    label: specialization.speciality,
-                    iconPath: 'assets/images/speciality_items/general.png',
-                    isSelected: widget.selectedItem == i,
-                    onTap: () => widget.onSpecialityTap(i),
-                  );
-                },
               ),
       ],
     );

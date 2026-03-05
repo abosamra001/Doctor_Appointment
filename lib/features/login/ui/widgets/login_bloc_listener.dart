@@ -40,10 +40,9 @@ class LoginBlocListener extends StatelessWidget {
   ) async {
     context.pop();
     final token = loginResponse.data.token;
-    final userName = loginResponse.data.userName;
     await TokenStorage.saveToken(token);
     if (context.mounted) {
-      context.pushReplacementNamed(Routes.homeScreen, arg: userName);
+      context.pushReplacementNamed(Routes.homeScreen);
     }
   }
 }
