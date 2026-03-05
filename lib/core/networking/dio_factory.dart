@@ -15,27 +15,28 @@ class DioFactory {
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut;
 
-      addDioInterceptor();
+      addDioInterceptors();
       return dio!;
     } else {
       return dio!;
     }
   }
 
-  static void addDioInterceptor() {
+  static void addDioInterceptors() {
     dio!.interceptors.add(
       PrettyDioLogger(
         requestBody: true,
         requestHeader: true,
         responseHeader: true,
-        responseBody: true,
       ),
     );
     dio!.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final token = await TokenStorage.getToken();
-          if (token != null && token.isNotEmpty) {
+          final hasValidToken = await TokenStorage.hasValidToken();
+          if (hasValidToken) {
+            final token = await TokenStorage.getToken();
+            options.headers['Accept'] = 'application/json';
             options.headers['Authorization'] = 'Bearer $token';
           }
           handler.next(options);

@@ -1,7 +1,7 @@
 import 'package:advanced2/core/di/dependency_injection.dart';
 import 'package:advanced2/core/routing/routes.dart';
-import 'package:advanced2/features/home/logic/cubit/specialization_cubit.dart';
-import 'package:advanced2/features/home/ui/screens/home_screen.dart';
+import 'package:advanced2/features/home/logic/cubit/home_cubit.dart';
+import 'package:advanced2/features/home/ui/screens/main_navigation_screen.dart';
 import 'package:advanced2/features/login/logic/cubit/login_cubit.dart';
 import 'package:advanced2/features/login/ui/screens/login_screen.dart';
 import 'package:advanced2/features/onboarding/onboarding_screen.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  Route onGenerateRoute(RouteSettings routeSettings) {
+  Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -32,21 +32,16 @@ class AppRouter {
           ),
         );
       case Routes.homeScreen:
-        final userName = routeSettings.arguments as String?;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<SpecializationCubit>(),
-            child: HomeScreen(userName: userName),
+            create: (context) => getIt<HomeCubit>()
+              ..getAllSpecializations()
+              ..getUserProfile(),
+            child: const MainNavigationScreen(),
           ),
         );
       default:
-        return MaterialPageRoute(
-          builder: (context) => Scaffold(
-            body: Center(
-              child: Text("No page route for ${routeSettings.name}"),
-            ),
-          ),
-        );
+        return null;
     }
   }
 }

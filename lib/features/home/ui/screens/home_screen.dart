@@ -1,20 +1,20 @@
-import 'package:advanced2/core/helpers/app_dialogs.dart';
-import 'package:advanced2/core/helpers/spacer.dart';
-import 'package:advanced2/features/home/data/models/specialization_response.dart';
-import 'package:advanced2/features/home/logic/cubit/specialization_cubit.dart';
-import 'package:advanced2/features/home/logic/cubit/specialization_state.dart';
-import 'package:advanced2/features/home/ui/widgets/doctor_speciality.dart';
-import 'package:advanced2/features/home/ui/widgets/home_find_nearby_banner.dart';
-import 'package:advanced2/features/home/ui/widgets/home_top_bar.dart';
-import 'package:advanced2/features/home/ui/widgets/recommendation_doctor.dart';
-import 'package:advanced2/features/home/ui/widgets/recommendation_doctor_item.dart';
+import 'package:advanced2/core/widgets/screen_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/helpers/spacer.dart';
+import '../../../home/data/models/specialization_response.dart';
+import '../../../home/logic/cubit/home_cubit.dart';
+import '../../../home/ui/widgets/doctor_speciality.dart';
+import '../../../home/ui/widgets/home_find_nearby_banner.dart';
+import '../../../home/ui/widgets/home_top_bar.dart';
+import '../../../home/ui/widgets/recommendation_doctor.dart';
+import '../../../home/ui/widgets/recommendation_doctor_item.dart';
+import '../../logic/cubit/home_state.dart';
+
 class HomeScreen extends StatefulWidget {
-  final String? userName;
-  const HomeScreen({super.key, required this.userName});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,12 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   List<SpecializationData> specializationData = [];
   List<RecommendationDoctorItem> recommendationDoctorItems = [];
   int? currentSelectedSpecialization;
-
-  @override
-  void initState() {
-    super.initState();
-    context.read<SpecializationCubit>().emitSpecializationState();
-  }
 
   void _onSpecialityTap(int index) {
     setState(() {
@@ -43,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
           RecommendationDoctorItem(
             doctorName: doctor.name,
             image: doctor.photo,
-            specialize: doctor.degree,
-            rating: '4.0',
-            reviewCount: '4,234',
+            degree: doctor.degree,
+            phoneNumber: doctor.phone,
+            email: doctor.email,
           ),
         );
       }
@@ -54,50 +48,71 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SpecializationCubit, SpecializationState>(
-      listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
-      listener: (context, state) {
-        state.whenOrNull(
-          loading: () => AppDialogs.showLoadingIndicator(context),
-          success: (data) {
-            final specializationResponse = data as SpecializationResponse;
-            setState(() {
-              specializationData = specializationResponse.specializationData;
-            });
-          },
-          error: (error) =>
-              AppDialogs.showErrorStateDialog(context, error: error),
-        );
-      },
+    return ScreenWrapper(
       child: Scaffold(
         body: SafeArea(
           child: Container(
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            margin: EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h),
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                HomeTopBar(name: widget.userName ?? "Chief"),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const HomeFindNearbyBanner(),
-                        verticalSpace(24),
-                        DoctorSpeciality(
-                          items: specializationData,
-                          selectedItem: currentSelectedSpecialization,
-                          onSpecialityTap: _onSpecialityTap,
-                        ),
-                        verticalSpace(24),
-                        RecommendationDoctors(
-                          doctors: recommendationDoctorItems,
-                        ),
-                        verticalSpace(24),
-                      ],
-                    ),
-                  ),
+                BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (previous, current) =>
+                      current is UserLoading ||
+                      current is UserSuccess ||
+                      current is UserError,
+                  builder: (context, state) {
+                    String userName = 'Chief';
+                    state.whenOrNull(
+                      userSuccess: (data) {
+                        userName = data.userData[0].name;
+                      },
+                    );
+                    return HomeTopBar(name: userName);
+                  },
+                ),
+                const HomeFindNearbyBanner(),
+                verticalSpace(16),
+
+                BlocBuilder<HomeCubit, HomeState>(
+                  buildWhen: (previous, current) =>
+                      current is SpecializationLoading ||
+                      current is SpecializationSuccess ||
+                      current is SpecializationError,
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      specializationLoading: () =>
+                          const Center(child: CircularProgressIndicator()),
+                      specializationSuccess: (specializationResponse) {
+                        specializationData =
+                            specializationResponse.specializationData;
+
+                        return Expanded(
+                          child: Column(
+                            children: [
+                              DoctorSpeciality(
+                                items: specializationData,
+                                selectedItem: currentSelectedSpecialization,
+                                onSpecialityTap: _onSpecialityTap,
+                              ),
+                              Expanded(
+                                child: RecommendationDoctors(
+                                  doctors: recommendationDoctorItems,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      specializationError: (error) {
+                        return const SizedBox.shrink();
+                      },
+                      orElse: () {
+                        return const SizedBox.shrink();
+                      },
+                    );
+                  },
                 ),
               ],
             ),

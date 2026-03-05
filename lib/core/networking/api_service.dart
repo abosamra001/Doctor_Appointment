@@ -1,5 +1,6 @@
 import 'package:advanced2/core/networking/api_constants.dart';
 import 'package:advanced2/features/home/data/models/specialization_response.dart';
+import 'package:advanced2/features/home/data/models/user_response.dart';
 import 'package:advanced2/features/login/data/models/login_request_body.dart';
 import 'package:advanced2/features/login/data/models/login_response.dart';
 import 'package:advanced2/features/signup/data/models/signup_request_body.dart';
@@ -21,4 +22,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.specialization)
   Future<SpecializationResponse> getAllSpecializations();
+
+  @GET(ApiConstants.userProfile)
+  Future<UserResponse> getUserProfile();
 }

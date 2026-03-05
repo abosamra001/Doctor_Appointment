@@ -15,6 +15,19 @@ class _RecommendationDoctorsState extends State<RecommendationDoctors> {
   bool seeAll = false;
   @override
   Widget build(BuildContext context) {
+    if (widget.doctors.isEmpty) {
+      return Center(
+        child: Text(
+          'Tab a Speciality from above to preview doctors.',
+          style: AppTextStyles.font14GrayReqular,
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+    final visibleDoctorsList = seeAll
+        ? widget.doctors
+        : widget.doctors.take(3).toList();
+
     return Column(
       children: [
         Row(
@@ -38,23 +51,13 @@ class _RecommendationDoctorsState extends State<RecommendationDoctors> {
           ],
         ),
         verticalSpace(8),
-        widget.doctors.isEmpty
-            ? Center(
-                child: Text(
-                  'Tab a Speciality from above to preview doctors.',
-                  style: AppTextStyles.font14GrayReqular,
-                  textAlign: .center,
-                ),
-              )
-            : ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: seeAll
-                    ? widget.doctors.length
-                    : (widget.doctors.length > 3 ? 3 : widget.doctors.length),
-                itemBuilder: (context, i) => widget.doctors[i],
-                separatorBuilder: (context, i) => verticalSpace(12),
-              ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: visibleDoctorsList.length,
+            itemBuilder: (context, i) => visibleDoctorsList[i],
+            separatorBuilder: (context, i) => verticalSpace(12),
+          ),
+        ),
       ],
     );
   }

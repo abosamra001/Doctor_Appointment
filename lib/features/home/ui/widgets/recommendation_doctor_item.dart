@@ -1,5 +1,4 @@
 import 'package:advanced2/core/helpers/spacer.dart';
-import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,16 +7,16 @@ import 'package:flutter_svg/svg.dart';
 class RecommendationDoctorItem extends StatelessWidget {
   final String doctorName;
   final String image;
-  final String specialize;
-  final String rating;
-  final String reviewCount;
+  final String degree;
+  final String phoneNumber;
+  final String email;
   const RecommendationDoctorItem({
     super.key,
     required this.doctorName,
     required this.image,
-    required this.specialize,
-    required this.rating,
-    required this.reviewCount,
+    required this.degree,
+    required this.phoneNumber,
+    required this.email,
   });
 
   @override
@@ -67,23 +66,21 @@ class RecommendationDoctorItem extends StatelessWidget {
                     style: AppTextStyles.font16DarkBlueBold,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    specialize,
-                    style: AppTextStyles.font12GrayReqular,
-                    overflow: TextOverflow.ellipsis,
-                  ),
                   Row(
                     crossAxisAlignment: .end,
                     children: [
-                      Icon(
-                        Icons.star_rate_rounded,
-                        color: ColorManager.gold,
-                        size: 20.sp,
-                      ),
-                      Text(rating, style: AppTextStyles.font12GrayMedium),
+                      Text(degree, style: AppTextStyles.font12GrayMedium),
                       horizontalSpace(2),
-                      Text(reviewCount, style: AppTextStyles.font12GrayMedium),
+                      Text(
+                        ' | $phoneNumber',
+                        style: AppTextStyles.font12GrayMedium,
+                      ),
                     ],
+                  ),
+                  Text(
+                    email,
+                    style: AppTextStyles.font12GrayReqular,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
