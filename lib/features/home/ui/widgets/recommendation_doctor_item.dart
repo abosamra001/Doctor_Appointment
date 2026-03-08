@@ -1,8 +1,9 @@
 import 'package:advanced2/core/helpers/spacer.dart';
 import 'package:advanced2/core/theme/styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class RecommendationDoctorItem extends StatelessWidget {
   final String doctorName;
@@ -34,24 +35,16 @@ class RecommendationDoctorItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.r),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Image.network(
-              image,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return SvgPicture.asset(
-                  'assets/svgs/doctor_placeholder.svg',
-                  fit: BoxFit.cover,
-                );
-              },
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Container(
-                  color: Colors.grey.shade200,
-                  child: const Center(
-                    child: CircularProgressIndicator(strokeWidth: 2),
+            child: CachedNetworkImage(
+              imageUrl:
+                  'https://i.pinimg.com/474x/20/c4/2f/20c42f3ab15e81f2f8da8ac6339d506c.jpg',
+              progressIndicatorBuilder: (context, url, progress) =>
+                  const AspectRatio(
+                    aspectRatio: 1.6,
+                    child: BlurHash(hash: 'LGK1:e4T%~-p~os:9axa00t8-:Rj'),
                   ),
-                );
-              },
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              fit: BoxFit.cover,
             ),
           ),
           Expanded(
