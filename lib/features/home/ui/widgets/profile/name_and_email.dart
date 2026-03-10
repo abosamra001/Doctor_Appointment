@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/helpers/spacer.dart';
-import '../../../../core/theme/styles.dart';
+import '../../../../../core/helpers/spacer.dart';
+import '../../../../../core/theme/styles.dart';
 
 class NameAndEmail extends StatelessWidget {
   final String name;

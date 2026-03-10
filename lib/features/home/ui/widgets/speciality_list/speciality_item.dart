@@ -20,15 +20,15 @@ class SpecialityItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isSelected ? () {} : onTap,
       child: SizedBox(
         width: 74.w,
         height: 86.h,
         child: Column(
           children: [
             Container(
-              width: 56.w,
-              height: 56.h,
+              width: isSelected ? 60.w : 56.w,
+              height: isSelected ? 60.w : 56.h,
               decoration: BoxDecoration(
                 color: isSelected
                     ? ColorManager.mainBlue.withAlpha(155)
@@ -40,7 +40,9 @@ class SpecialityItem extends StatelessWidget {
             verticalSpace(8),
             Text(
               label,
-              style: AppTextStyles.font11DartBlueReqular,
+              style: isSelected
+                  ? AppTextStyles.font11BlueSemiBold
+                  : AppTextStyles.font11DartBlueReqular,
               overflow: .ellipsis,
             ),
           ],

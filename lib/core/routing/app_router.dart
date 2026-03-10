@@ -34,9 +34,13 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<HomeCubit>()
-              ..getAllSpecializations()
-              ..getUserProfile(),
+            create: (context) {
+              final homeCubit = getIt<HomeCubit>();
+              homeCubit.getUserProfile().then((_) {
+                homeCubit.getAllSpecializations();
+              });
+              return homeCubit;
+            },
             child: const MainNavigationScreen(),
           ),
         );
