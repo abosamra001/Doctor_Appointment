@@ -2,17 +2,17 @@ import 'package:advanced2/core/helpers/spacer.dart';
 import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/widgets/screen_wrapper.dart';
 import 'package:advanced2/features/home/logic/cubit/home_cubit.dart';
-import 'package:advanced2/features/home/ui/widgets/name_and_email.dart';
-import 'package:advanced2/features/home/ui/widgets/profile_top_bar.dart';
+import 'package:advanced2/features/home/ui/widgets/profile/name_and_email.dart';
+import 'package:advanced2/features/home/ui/widgets/profile/profile_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../logic/cubit/home_state.dart';
-import '../widgets/my_appointments_and_mediacl_records.dart';
-import '../widgets/profile_custom_cards.dart';
-import '../widgets/profile_picture.dart';
+import '../widgets/profile/my_appointments_and_mediacl_records.dart';
+import '../widgets/profile/profile_custom_cards.dart';
+import '../widgets/profile/profile_picture.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});
@@ -51,7 +51,7 @@ class UserProfileScreen extends StatelessWidget {
                                 current is UserSuccess,
 
                             builder: (context, state) {
-                              String name = 'New Memner';
+                              String name = 'New Member';
                               String email = '';
                               state.whenOrNull(
                                 userSuccess: (data) {

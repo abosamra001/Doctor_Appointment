@@ -1,20 +1,16 @@
 import 'package:advanced2/core/widgets/screen_wrapper.dart';
-import 'package:advanced2/features/home/ui/widgets/doctor_speciality_and_recommendatoins.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/helpers/spacer.dart';
 import '../../../home/ui/widgets/home_find_nearby_banner.dart';
 import '../../../home/ui/widgets/home_top_bar.dart';
+import '../widgets/speciality_list/doctor_speciality_bloc_builder.dart';
+import '../widgets/recommendation_doctors/recommendation_doctors_bloc_builder.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenWrapper(
@@ -29,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 const HomeTopBar(),
                 const HomeFindNearbyBanner(),
                 verticalSpace(16),
-                const DoctorSpecialityAndRecommendatoins(),
+                const DoctorSpecialityBlocBuilder(),
+                const RecommendationDoctorsBlocBuilder(),
               ],
             ),
           ),

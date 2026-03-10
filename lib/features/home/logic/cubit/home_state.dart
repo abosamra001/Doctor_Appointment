@@ -9,10 +9,14 @@ class HomeState with _$HomeState {
 
   // Specialization States
   const factory HomeState.specializationLoading() = SpecializationLoading;
-  const factory HomeState.specializationSuccess(SpecializationResponse data) =
+  const factory HomeState.specializationSuccess(List<SpecializationData> data) =
       SpecializationSuccess;
   const factory HomeState.specializationError(String error) =
       SpecializationError;
+
+  const factory HomeState.doctorsSucces(List<DoctorsData> doctors) =
+      DoctorsSuccess;
+  const factory HomeState.doctorsError(String error) = DoctorsError;
 
   // User States
   const factory HomeState.userLoading() = UserLoading;

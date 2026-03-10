@@ -1,3 +1,6 @@
+import 'package:advanced2/core/helpers/extensions.dart';
+import 'package:advanced2/core/networking/token_storage.dart';
+import 'package:advanced2/core/routing/routes.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +15,7 @@ class ProfileTopBar extends StatelessWidget {
       child: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => _logOut(context),
             icon: const Icon(Icons.logout),
             color: Colors.white,
           ),
@@ -27,5 +30,12 @@ class ProfileTopBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _logOut(BuildContext context) async {
+    await TokenStorage.deleteToken();
+    if (context.mounted) {
+      context.pushReplacementNamed(Routes.loginScreen);
+    }
   }
 }

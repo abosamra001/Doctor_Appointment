@@ -1,8 +1,8 @@
 import 'package:advanced2/core/helpers/spacer.dart';
 import 'package:advanced2/core/theme/styles.dart';
+import 'package:advanced2/core/widgets/container_shimmer_loading.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecommendationDoctorItem extends StatelessWidget {
@@ -38,11 +38,11 @@ class RecommendationDoctorItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl:
                   'https://i.pinimg.com/474x/20/c4/2f/20c42f3ab15e81f2f8da8ac6339d506c.jpg',
-              progressIndicatorBuilder: (context, url, progress) =>
-                  const AspectRatio(
-                    aspectRatio: 1.6,
-                    child: BlurHash(hash: 'LGK1:e4T%~-p~os:9axa00t8-:Rj'),
-                  ),
+              placeholder: (context, url) => const ContainerShimmerLoading(
+                width: 110,
+                height: 110,
+                borderRadius: 16,
+              ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fit: BoxFit.cover,
             ),
@@ -55,7 +55,7 @@ class RecommendationDoctorItem extends StatelessWidget {
                 mainAxisAlignment: .spaceAround,
                 children: [
                   Text(
-                    'Dr. $doctorName',
+                    doctorName,
                     style: AppTextStyles.font16DarkBlueBold,
                     overflow: TextOverflow.ellipsis,
                   ),
