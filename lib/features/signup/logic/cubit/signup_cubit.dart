@@ -9,12 +9,12 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit({required this.signupRepo}) : super(const SignupState.initial());
 
   Future<void> emitSignupState(SignupRequestBody signupRequestBody) async {
-    emit(const SignupState.loading());
+    emit(const SignupState.signupLoading());
     final res = await signupRepo.signup(signupRequestBody);
     res.when(
-      success: (signupResponse) => emit(SignupState.success(signupResponse)),
-      failure: (error) =>
-          emit(SignupState.error(errorModel: error.apiErrorModel)),
+      success: (signupResponse) =>
+          emit(SignupState.signupSuccess(signupResponse)),
+      failure: (apiErrorModel) => emit(SignupState.signupError(apiErrorModel)),
     );
   }
 }

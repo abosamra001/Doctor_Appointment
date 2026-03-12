@@ -14,27 +14,29 @@ class SignupBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignupCubit, SignupState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is SignupLoading ||
+          current is SignupSuccess ||
+          current is SignupError,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () => AppDialogs.showLoadingIndicator(context),
-          success: (signupResponse) {
+          signupLoading: () => AppDialogs.showLoadingIndicator(context),
+          signupSuccess: (signupResponse) {
             context.pop();
             AppDialogs.showSuccessStateDialog(
               context,
-              'Congratulations your account has created successfully! \nplease login to continue.',
-              () {
+              message:
+                  'Congratulations your account has created successfully! \nplease login to continue.',
+              onPressed: () {
                 context.pop();
                 context.pushReplacementNamed(Routes.loginScreen);
               },
             );
           },
-          error: (errorModel) {
+          signupError: (apiErrorModel) {
             context.pop();
             AppDialogs.showErrorStateDialog(
               context,
-              error: errorModel.message,
-              subError: parseValidationErrors(errorModel.data),
+              apiErrorModel: apiErrorModel,
             );
           },
         );

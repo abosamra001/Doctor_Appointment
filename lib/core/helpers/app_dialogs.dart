@@ -1,4 +1,5 @@
 import 'package:advanced2/core/helpers/extensions.dart';
+import 'package:advanced2/core/networking/api_error_model.dart';
 import 'package:advanced2/core/theme/colors.dart';
 import 'package:advanced2/core/theme/styles.dart';
 import 'package:flutter/material.dart';
@@ -15,26 +16,21 @@ class AppDialogs {
 
   static void showErrorStateDialog(
     BuildContext context, {
-    required String error,
-    List<String>? subError,
+    required ApiErrorModel apiErrorModel,
   }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         icon: const Icon(Icons.error, color: Colors.red, size: 32),
-        title: Text(error, style: AppTextStyles.font15DarkBlueMedium),
-        content: (subError != null && subError.isNotEmpty)
-            ? Column(
-                mainAxisSize: .min,
-                crossAxisAlignment: .start,
-                children: [
-                  ...subError.map(
-                    (error) =>
-                        Text(error, style: AppTextStyles.font13DartBlueReqular),
-                  ),
-                ],
-              )
-            : null,
+        title: Text(
+          apiErrorModel.message,
+          style: AppTextStyles.font15DarkBlueMedium,
+        ),
+        content: Text(
+          apiErrorModel.parseSubErrors(),
+          style: AppTextStyles.font13DartBlueReqular,
+        ),
+
         actions: [
           TextButton(
             onPressed: () {
@@ -49,10 +45,10 @@ class AppDialogs {
   }
 
   static void showSuccessStateDialog(
-    BuildContext context,
-    String message,
-    VoidCallback onPressed,
-  ) {
+    BuildContext context, {
+    required String message,
+    required VoidCallback onPressed,
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

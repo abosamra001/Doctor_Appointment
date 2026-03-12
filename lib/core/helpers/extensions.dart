@@ -25,3 +25,7 @@ extension Navigation on BuildContext {
 extension ListExtension<T> on List<T>? {
   bool isNullOrEmpty() => this == null || this!.isEmpty;
 }
+
+extension MapExtension<T, S> on Map<T, S>? {
+  bool isNullOrEmpty() => this == null || this!.isEmpty;
+}
