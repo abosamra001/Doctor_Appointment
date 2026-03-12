@@ -21,9 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
         getDoctorsDataById(specializationData.first.id);
         emit(HomeState.specializationSuccess(specializationData));
       },
-      failure: (errorHandler) => emit(
-        HomeState.specializationError(errorHandler.apiErrorModel.message),
-      ),
+      failure: (apiErrorModel) =>
+          emit(HomeState.specializationError(apiErrorModel.message)),
     );
   }
 
@@ -43,8 +42,8 @@ class HomeCubit extends Cubit<HomeState> {
     final res = await homeRepo.getUserProfile();
     res.when(
       success: (userResponse) => emit(HomeState.userSuccess(userResponse)),
-      failure: (error) =>
-          emit(HomeState.userError(error.apiErrorModel.message)),
+      failure: (apiErrorModel) =>
+          emit(HomeState.userError(apiErrorModel.message)),
     );
   }
 }

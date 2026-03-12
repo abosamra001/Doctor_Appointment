@@ -14,7 +14,7 @@ class HomeRepo {
       final res = await apiService.getAllSpecializations();
       return ApiResult.success(res);
     } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
+      return ApiResult.failure(ApiErrorHandler.handle(e));
     }
   }
 
@@ -23,7 +23,7 @@ class HomeRepo {
       final res = await apiService.getUserProfile();
       return ApiResult.success(res);
     } catch (e) {
-      return ApiResult.failure(ErrorHandler.handle(e));
+      return ApiResult.failure(ApiErrorHandler.handle(e));
     }
   }
 }

@@ -14,7 +14,6 @@ class RecommendationDoctorsBlocBuilder extends StatelessWidget {
       buildWhen: (previous, current) =>
           current is DoctorsSuccess || current is DoctorsError,
       builder: (context, state) {
-        debugPrint('RecommendationDoctorsBlocBuilder is build');
         return state.maybeWhen(
           doctorsSucces: (doctorsDataList) => Expanded(
             child: RecommendationDoctors(doctorsDataList: doctorsDataList),

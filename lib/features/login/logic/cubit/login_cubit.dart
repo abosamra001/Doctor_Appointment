@@ -11,15 +11,15 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginRepo}) : super(const LoginState.initial());
 
   void emitLoginState(LoginRequestBody loginRequestBody) async {
-    emit(const LoginState.loading());
+    emit(const LoginState.loginLoading());
     final res = await loginRepo.login(loginRequestBody);
     res.when(
       success: (loginResponse) async {
         await TokenStorage.saveToken(loginResponse.data.token);
-        emit(LoginState.success(loginResponse));
+        emit(LoginState.loginSuccess(loginResponse));
       },
-      failure: (errorHandler) =>
-          emit(LoginState.error(error: errorHandler.apiErrorModel.message)),
+      failure: (apiErrorModel) =>
+          emit(LoginState.loginError(apiErrorModel.message)),
     );
   }
 }
